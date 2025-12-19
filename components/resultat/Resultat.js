@@ -4,8 +4,11 @@ import {Text, View} from 'react-native';
 import {valoracioIMC} from '../../utils/Utils';
 
 /**
- * Component stateless que mostra el missatge corresponent al IMC i l'IMC calculat
- * @param {float} Props
+ * Component stateless que mostra 
+ *  - el missatge corresponent segons el IMC i també mostra l'IMC calculat
+ * @param {Object} props - Propietats del que rep el component.
+ * @param {float} props.imc - l'IMC calculat
+ *
  * @example
  * <Resultat imc=34.5 />
  */

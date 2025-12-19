@@ -15,9 +15,11 @@ import {comprovaPes, comprovaAlt, calculaIMC} from '../../utils/Utils';
  * @requires module:utils/comprovaPes
  * @requires module:utils/comprovaAlt
  * @requires module:utils/comprovaAlt
- * 
+ * @param {Object} props - Propietats del que rep el component.
+ * @param {string} props.comunicaIMC - Funció que utilitza este component per a comunicar el IMC calculat al component pare (comunicació fill-pare)
+ *  
  * @example
- * <Calculadora />
+ * <Calculadora comunicaIMC=={rebreIMC}/>
  */
 const Calculadora = (props) => {
 
@@ -56,7 +58,8 @@ const comprovaIActualitzaPes = pes => {
   };
 
 /**
- *  Aquesta funció ens indica si tant el pes com l'alçada són correctes
+ *  Aquesta funció ens indica si tant el pes com l'alçada són correctes.
+ *  Ens permetrà mostrar el botó calcular o no.
  * @return {boolean} - true, si les dades són correctes, false si no ho són.
  *
 **/

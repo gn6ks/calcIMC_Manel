@@ -104,8 +104,8 @@ export const comprovaAlt = alt => {
 /**
  * Realitza el càlcul de l'IMC a partir d'un pes i una alçada
  * @function
- * @param {float} pes El pes en format correcte
- * @param {float} alt L'alçada ien format correcte
+ * @param {float} unPes El pes en format correcte
+ * @param {float} unaAlsada L'alçada en format correcte
  * @returns {float} Torna l'imc calculat segons la formula.
  *
  */
@@ -116,21 +116,15 @@ export const calculaIMC = (unPes, unaAlsada) => {
 
 /**
  * Segons un imc rebut com a paràmatre, torna el missatge que li correspon i el color en que es mostrarà el missatge.
- * @function
- * @param {float} unIMC L'imc a partir del qual mirarem quin tipus de pes té.
- * @returns {missatgeIMC} Objecte que conté el missatge a mostrar i el color.
- *
- *  * Cada categoria inclou un color representatiu:
- *  - green → rang saludable o lleuger risc
- *  - orange → risc moderat
- *  - red → risc elevat
  *
  * @function valoracioIMC
- * @param {number} unIMC - Valor numèric de l'IMC calculat.
+ * @param {float} unIMC - Valor numèric de l'IMC calculat.
  * @returns {{msg: string, color: string}} Objecte amb:
- *   - `msg`: descripció de la categoria d'IMC.
- *   - `color`: color recomanat per representar visualment l'estat.
- *
+ *   - msg: descripció de la categoria d'IMC.
+ *   - color: color recomanat per representar visualment l'estat.
+ *      - green → rang saludable o lleuger risc
+ *      - orange → risc moderat
+ *      - red → risc elevat
  * @example
  * valoracioIMC(22);
  * // → { msg: "Normopes", color: "green" }
