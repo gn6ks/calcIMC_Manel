@@ -27,6 +27,9 @@ const App = () => {
   const [imcRebut, canviaImcRebut] = useState(null);
   const [alturaRecibida, cambioAlturaRecibida] = useState(null);
   const [pesoRecibido, cambioPesoRecibido] = useState(null);
+  const [edadRecibida, cambioEdadRecibida] = useState(null);
+  const [generoRecibido, cambioGeneroRecibido] = useState(null);
+  const [nivelActividadRecibido, cambioNivelActividadRecibido] = useState(null);
 
   const rebreIMC = (unIMC) => {
     canviaImcRebut(unIMC);
@@ -34,19 +37,47 @@ const App = () => {
 
   const recibeAltura = (altura) => {
     cambioAlturaRecibida(altura);
-  }
+  };
 
   const recibePeso = (peso) => {
     cambioPesoRecibido(peso);
-  }
+  };
+
+  const recibeEdad = (edad) => {
+    cambioEdadRecibida(edad);
+  };
+
+  const recibeGenero = (genero) => {
+    cambioGeneroRecibido(genero);
+  };
+
+  const recibeNivelActividad = (nivelActividad) => {
+    cambioNivelActividadRecibido(nivelActividad);
+  };
 
   return (
     <View>
       <StatusBar />
       <View style={{ justifyContent: "center" }}>
         <Titol />
-        <Calculadora comunicaIMC={rebreIMC} escribeAltura={recibeAltura} escribePeso={recibePeso} />
-        {imcRebut !== null && <Resultat imc={imcRebut} altura={alturaRecibida} peso={pesoRecibido} />}
+        <Calculadora
+          comunicaIMC={rebreIMC}
+          escribeAltura={recibeAltura}
+          escribePeso={recibePeso}
+          escribeEdad={recibeEdad}
+          escribeGenero={recibeGenero}
+          escribeNivelActividad={recibeNivelActividad}
+        />
+        {imcRebut !== null && (
+          <Resultat
+            imc={imcRebut}
+            altura={alturaRecibida}
+            peso={pesoRecibido}
+            edad={edadRecibida}
+            genero={generoRecibido}
+            nivelActividad={nivelActividadRecibido}
+          />
+        )}
       </View>
     </View>
   );

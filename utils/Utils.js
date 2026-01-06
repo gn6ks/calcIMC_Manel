@@ -198,19 +198,19 @@ export const calcularNecesidad = (peso, pesoMinimo, pesoMaximo) => {
   return ObjetoNecesidad;
 };
 
-export const comprobarEdad = ( edad ) => {
-  if ( edad > 0 && Number.isInteger(edad) ) {
+export const comprobarEdad = (edad) => {
+  if (edad > 0 && Number.isInteger(edad)) {
     return true;
   }
-}
+};
 
-export const comprobarGenero = ( genero ) => {
-  if ( genero === "h" || genero === "m" ) {
-    return true; 
+export const comprobarGenero = (genero) => {
+  if (genero === "h" || genero === "m") {
+    return true;
   } else {
     return false;
   }
-}
+};
 
 export const calcularCaloriasDiarias = (
   peso,
@@ -224,10 +224,10 @@ export const calcularCaloriasDiarias = (
   let objetoCalorias = null;
 
   if (genero === "h") {
-  //hombres
+    //hombres
     bmr = 10 * peso + 6.25 * (altura * 100) - 5 * edad + 5;
   } else if (genero === "m") {
-  //mujeres
+    //mujeres
     bmr = 10 * peso + 6.25 * (altura * 100) - 5 * edad - 161;
   }
 

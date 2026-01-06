@@ -2,7 +2,13 @@ import React, { useState } from "react";
 
 import { StyleSheet, View, Keyboard } from "react-native";
 import { TextInput, Button, HelperText, RadioButton } from "react-native-paper";
-import { comprovaPes, comprovaAlt, comprobarEdad, comprobarGenero, calculaIMC } from "../../utils/Utils";
+import {
+  comprovaPes,
+  comprovaAlt,
+  comprobarEdad,
+  comprobarGenero,
+  calculaIMC,
+} from "../../utils/Utils";
 
 /**
  * Aquest component recull les dades d'usuari per a poder calcular
@@ -63,13 +69,13 @@ const Calculadora = (props) => {
     const resultadoComprobacion = comprobarEdad(edad);
     cambiarEdad(edad);
     props.comunicaIMC(null);
-  }
+  };
 
   const compruebaActualizaGenero = (genero) => {
     const resultadoComprobacion = comprobarGenero(genero);
     cambiarGenero(genero);
     props.comunicaIMC(null);
-  }
+  };
 
   /**
    *  Aquesta funció ens indica si tant el pes com l'alçada són correctes.
@@ -151,12 +157,50 @@ const Calculadora = (props) => {
           <RadioButton.Item
             label="Hombre"
             value="h"
+            status={genero === "h" ? "checked" : "unchecked"}
             onPress={() => cambiarGenero("h")}
           />
           <RadioButton.Item
             label="Mujer"
             value="m"
+            status={genero === "m" ? "checked" : "unchecked"}
             onPress={() => cambiarGenero("m")}
+          />
+        </RadioButton.Group>
+      </View>
+      <View>
+        <RadioButton.Group>
+          <RadioButton.Item
+            label="sedentario"
+            value="sedentario"
+            status={nivelActividad === "sedentario" ? "checked" : "unchecked"}
+            onPress={() => cambiarNivelActividad("sedentario")}
+          />
+          <RadioButton.Item
+            label="ligero"
+            value="ligero"
+            status={nivelActividad === "ligero" ? "checked" : "unchecked"}
+            onPress={() => cambiarNivelActividad("ligero")}
+          />
+          <RadioButton.Item
+            label="moderado"
+            value="moderado"
+            status={nivelActividad === "moderado" ? "checked" : "unchecked"}
+            onPress={() => cambiarNivelActividad("moderado")}
+          />
+          <RadioButton.Item
+            label="intenso"
+            value="intenso"
+            status={nivelActividad === "intenso" ? "checked" : "unchecked"}
+            onPress={() => cambiarNivelActividad("intenso")}
+          />
+          <RadioButton.Item
+            label="alta_intensidad"
+            value="alta_intensidad"
+            status={
+              nivelActividad === "alta_intensidad" ? "checked" : "unchecked"
+            }
+            onPress={() => cambiarNivelActividad("alta_intensidad")}
           />
         </RadioButton.Group>
       </View>
@@ -171,6 +215,9 @@ const Calculadora = (props) => {
               props.comunicaIMC(calculaIMC(pes, alt));
               props.escribeAltura(alt);
               props.escribePeso(pes);
+              props.escribeEdad(edad);
+              props.escribeGenero(genero);
+              props.escribeNivelActividad(nivelActividad);
             }}
           >
             Calcular
