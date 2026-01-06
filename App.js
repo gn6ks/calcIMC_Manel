@@ -25,18 +25,23 @@ import React, { useState } from "react";
 
 const App = () => {
   const [imcRebut, canviaImcRebut] = useState(null);
+  const [alturaRecibida, cambioAlturaRecibida] = useState(null);
 
   const rebreIMC = (unIMC) => {
     canviaImcRebut(unIMC);
   };
+
+  const recibeAltura = (altura) => {
+    cambioAlturaRecibida(altura);
+  }
 
   return (
     <View>
       <StatusBar />
       <View style={{ justifyContent: "center" }}>
         <Titol />
-        <Calculadora comunicaIMC={rebreIMC} />
-        {imcRebut !== null && <Resultat imc={imcRebut} />}
+        <Calculadora comunicaIMC={rebreIMC} escribeAltura={recibeAltura} />
+        {imcRebut !== null && <Resultat imc={imcRebut} altura={alturaRecibida} />}
       </View>
     </View>
   );

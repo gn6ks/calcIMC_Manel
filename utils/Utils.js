@@ -152,3 +152,17 @@ export const valoracioIMC = unIMC => {
     objectResultat = {msg: 'Obesitat de tipus IV (extrema)', color: 'red'};
   return objectResultat;
 };
+
+
+/**
+ * Funcion para calcular el rango de peso ideal segun la altura proporcionada por parametro
+ * El peso ideal se basa en el rango de IMC entre 18.5 y 24.9
+ * @function pesoIdeal
+ * @param {*} altura 
+ * @returns 
+ */
+export const pesoIdeal = ( altura ) => {
+  const limiteInferior = 18.5 * (altura * altura);
+  const limiteSuperior = 24.9 * (altura * altura);
+  return {min: limiteInferior, max: limiteSuperior};
+}

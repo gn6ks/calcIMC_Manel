@@ -30,7 +30,7 @@ const Calculadora = (props) => {
 
 
 /**
- *  Aquesta funció rep un pes, i comprova si té el format adient.
+ * Aquesta funció rep un pes, i comprova si té el format adient.
  * @return {Object} props - Propietats del objecte que torna.
  * @param {string} props.correcte - True o false, indica si el pes compleix el format establert o no
  * @param {string} props.msg - Missatge d'error (només en cas que props.correcte siga false).
@@ -118,7 +118,7 @@ const comprovaIActualitzaPes = pes => {
             labelStyle={{fontSize: 20, fontWeight: 'bold'}}
             icon="calculator"
             mode="contained"
-            onPress={() => {Keyboard.dismiss(); props.comunicaIMC(calculaIMC(pes, alt))}}>
+            onPress={() => {Keyboard.dismiss(); props.comunicaIMC(calculaIMC(pes, alt)); props.escribeAltura(alt);}}>
             Calcular
           </Button>
         </View>
