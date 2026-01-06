@@ -26,6 +26,7 @@ import React, { useState } from "react";
 const App = () => {
   const [imcRebut, canviaImcRebut] = useState(null);
   const [alturaRecibida, cambioAlturaRecibida] = useState(null);
+  const [pesoRecibido, cambioPesoRecibido] = useState(null);
 
   const rebreIMC = (unIMC) => {
     canviaImcRebut(unIMC);
@@ -35,13 +36,17 @@ const App = () => {
     cambioAlturaRecibida(altura);
   }
 
+  const recibePeso = (peso) => {
+    cambioPesoRecibido(peso);
+  }
+
   return (
     <View>
       <StatusBar />
       <View style={{ justifyContent: "center" }}>
         <Titol />
-        <Calculadora comunicaIMC={rebreIMC} escribeAltura={recibeAltura} />
-        {imcRebut !== null && <Resultat imc={imcRebut} altura={alturaRecibida} />}
+        <Calculadora comunicaIMC={rebreIMC} escribeAltura={recibeAltura} escribePeso={recibePeso} />
+        {imcRebut !== null && <Resultat imc={imcRebut} altura={alturaRecibida} peso={pesoRecibido} />}
       </View>
     </View>
   );

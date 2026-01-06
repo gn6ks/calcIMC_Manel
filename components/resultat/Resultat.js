@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Text, View} from 'react-native';
-import {valoracioIMC, pesoIdeal} from '../../utils/Utils';
+import {valoracioIMC, pesoIdeal, calcularNecesidad} from '../../utils/Utils';
 
 /**
  * Component stateless que mostra 
@@ -15,6 +15,7 @@ import {valoracioIMC, pesoIdeal} from '../../utils/Utils';
 const Resultat = props => {
   const valoracio = valoracioIMC(props.imc);
   const pesoIdealObj = pesoIdeal(props.altura);
+  const necesidadPeso = calcularNecesidad(props.peso, pesoIdealObj.min, pesoIdealObj.max);
   return (
     <View style={{alignItems: 'center'}}>
       <Text style={{fontSize: 20}}>
@@ -25,6 +26,9 @@ const Resultat = props => {
       </Text>
       <Text style={{fontSize: 20}}>
         Tu peso ideal esta entre {parseFloat(pesoIdealObj.min).toFixed(2)} kg y {parseFloat(pesoIdealObj.max).toFixed(2)} kg
+      </Text>
+      <Text style={{color: necesidadPeso.color, fontSize: 20}}>
+        {necesidadPeso.msg}
       </Text>
     </View>
   );

@@ -166,3 +166,24 @@ export const pesoIdeal = ( altura ) => {
   const limiteSuperior = 24.9 * (altura * altura);
   return {min: limiteInferior, max: limiteSuperior};
 }
+
+
+/**
+ * Funcion para calcular la necesidad de perder o ganar peso, segun el peso actual y el peso ideal qye se usa en la funcion pesoIdeal
+ * @function calcularNecesidad
+ * @param {*} peso 
+ * @param {*} pesoMinimo 
+ * @param {*} pesoMaximo 
+ * @returns 
+ */
+export const calcularNecesidad = ( peso, pesoMinimo, pesoMaximo ) => {
+  let ObjetoNecesidad = null;
+  if (peso < pesoMinimo) {
+    ObjetoNecesidad = {msg: 'Tienes que ganar peso', color: 'green'};
+  } else if (peso > pesoMaximo) {
+    ObjetoNecesidad = {msg: 'Tienes que perder peso', color: 'red'};
+  } else {
+    ObjetoNecesidad = {msg: 'Estas en un peso correcto / ideal', color: 'orange'};
+  }
+  return ObjetoNecesidad;
+}

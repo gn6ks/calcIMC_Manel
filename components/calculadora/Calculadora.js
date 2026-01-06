@@ -118,7 +118,7 @@ const comprovaIActualitzaPes = pes => {
             labelStyle={{fontSize: 20, fontWeight: 'bold'}}
             icon="calculator"
             mode="contained"
-            onPress={() => {Keyboard.dismiss(); props.comunicaIMC(calculaIMC(pes, alt)); props.escribeAltura(alt);}}>
+            onPress={() => {Keyboard.dismiss(); props.comunicaIMC(calculaIMC(pes, alt)); props.escribeAltura(alt); props.escribePeso(pes);}}>
             Calcular
           </Button>
         </View>
