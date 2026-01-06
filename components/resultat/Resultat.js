@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Text, View} from 'react-native';
-import {valoracioIMC, pesoIdeal, calcularNecesidad} from '../../utils/Utils';
+import {valoracioIMC, pesoIdeal, calcularNecesidad, calcularCaloriasDiarias} from '../../utils/Utils';
 
 /**
  * Component stateless que mostra 

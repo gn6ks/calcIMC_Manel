@@ -1,5 +1,5 @@
 // Conjunt de funcions per a fer comprovacions
-// Les definim fora del component Calculadora ja que 
+// Les definim fora del component Calculadora ja que
 // podran ser utilitzades per altres components de l'aplicació
 /** @module Utils */
 
@@ -43,7 +43,7 @@
  * // → { correcte: false, msg: "Escriu el pes en Kg i amb valors positius (ex: 50.5)" }
  */
 
-export const comprovaPes = pes => {
+export const comprovaPes = (pes) => {
   //definim una expressió regular per comprovar l'entrada que introdueix l'usuari
   const pesValid = /^(\d+)$|^(\d*\.\d+)$/;
 
@@ -53,19 +53,19 @@ export const comprovaPes = pes => {
       if (parseFloat(pes) === 0.0) {
         return {
           correcte: false,
-          msg: 'El pes ha de ser major de ' + pes + ' kg',
+          msg: "El pes ha de ser major de " + pes + " kg",
         };
       } else {
-        return {correcte: true, msg: ''};
+        return { correcte: true, msg: "" };
       }
     } else {
       return {
         correcte: false,
-        msg: 'Escriu el pes en Kg i amb valors positius (ex:50.5)',
+        msg: "Escriu el pes en Kg i amb valors positius (ex:50.5)",
       };
     }
   } else {
-    return {correcte: false, msg: ''};
+    return { correcte: false, msg: "" };
   }
 };
 
@@ -76,7 +76,7 @@ export const comprovaPes = pes => {
  * @returns {info} Torna un objecte info
  *
  */
-export const comprovaAlt = alt => {
+export const comprovaAlt = (alt) => {
   //definim una expressió regular per comprovar l'entrada que introdueix l'usuari
   const altValid = /^(\d+)$|^(\d*\.\d+)$/;
 
@@ -85,10 +85,10 @@ export const comprovaAlt = alt => {
       if (parseFloat(alt) === 0.0) {
         return {
           correcte: false,
-          msg: "L'alçada ha de ser major de " + alt + ' m.',
+          msg: "L'alçada ha de ser major de " + alt + " m.",
         };
       } else {
-        return {correcte: true, msg: ''};
+        return { correcte: true, msg: "" };
       }
     } else {
       return {
@@ -97,7 +97,7 @@ export const comprovaAlt = alt => {
       };
     }
   } else {
-    return {correcte: false, msg: ''};
+    return { correcte: false, msg: "" };
   }
 };
 
@@ -134,56 +134,113 @@ export const calculaIMC = (unPes, unaAlsada) => {
  * // → { msg: "Obesitat de tipus I", color: "orange" }
  *
  */
-export const valoracioIMC = unIMC => {
+export const valoracioIMC = (unIMC) => {
   let objectResultat = null;
-  if (unIMC < 18.5) objectResultat = {msg: 'Pes insuficient', color: 'green'};
-  else if (unIMC < 25) objectResultat = {msg: 'Normopes', color: 'green'};
+  if (unIMC < 18.5) objectResultat = { msg: "Pes insuficient", color: "green" };
+  else if (unIMC < 25) objectResultat = { msg: "Normopes", color: "green" };
   else if (unIMC < 27)
-    objectResultat = {msg: 'Sobrepes grau I', color: 'green'};
+    objectResultat = { msg: "Sobrepes grau I", color: "green" };
   else if (unIMC < 30)
-    objectResultat = {msg: 'Sobrepes grau II (preobesitat)', color: 'orange'};
+    objectResultat = { msg: "Sobrepes grau II (preobesitat)", color: "orange" };
   else if (unIMC < 35)
-    objectResultat = {msg: 'Obesitat de tipus I', color: 'orange'};
+    objectResultat = { msg: "Obesitat de tipus I", color: "orange" };
   else if (unIMC < 40)
-    objectResultat = {msg: 'Obesitat de tipus II', color: 'orange'};
+    objectResultat = { msg: "Obesitat de tipus II", color: "orange" };
   else if (unIMC < 50)
-    objectResultat = {msg: 'Obesitat de tipus III (mòrbida)', color: 'red'};
+    objectResultat = { msg: "Obesitat de tipus III (mòrbida)", color: "red" };
   else if (unIMC >= 50)
-    objectResultat = {msg: 'Obesitat de tipus IV (extrema)', color: 'red'};
+    objectResultat = { msg: "Obesitat de tipus IV (extrema)", color: "red" };
   return objectResultat;
 };
-
 
 /**
  * Funcion para calcular el rango de peso ideal segun la altura proporcionada por parametro
  * El peso ideal se basa en el rango de IMC entre 18.5 y 24.9
  * @function pesoIdeal
- * @param {*} altura 
- * @returns 
+ * @param {*} altura
+ * @returns
  */
-export const pesoIdeal = ( altura ) => {
+export const pesoIdeal = (altura) => {
   const limiteInferior = 18.5 * (altura * altura);
   const limiteSuperior = 24.9 * (altura * altura);
-  return {min: limiteInferior, max: limiteSuperior};
-}
-
+  return { min: limiteInferior, max: limiteSuperior };
+};
 
 /**
  * Funcion para calcular la necesidad de perder o ganar peso, segun el peso actual y el peso ideal qye se usa en la funcion pesoIdeal
  * @function calcularNecesidad
- * @param {*} peso 
- * @param {*} pesoMinimo 
- * @param {*} pesoMaximo 
- * @returns 
+ * @param {*} peso
+ * @param {*} pesoMinimo
+ * @param {*} pesoMaximo
+ * @returns
  */
-export const calcularNecesidad = ( peso, pesoMinimo, pesoMaximo ) => {
+export const calcularNecesidad = (peso, pesoMinimo, pesoMaximo) => {
   let ObjetoNecesidad = null;
+  let pesoResidual = 0.0;
   if (peso < pesoMinimo) {
-    ObjetoNecesidad = {msg: 'Tienes que ganar peso', color: 'green'};
+    pesoResidual = ((pesoMaximo - peso) / 2).toFixed(2);
+    ObjetoNecesidad = {
+      msg: `Tienes que ganar peso ${pesoResidual}`,
+      color: "green",
+    };
   } else if (peso > pesoMaximo) {
-    ObjetoNecesidad = {msg: 'Tienes que perder peso', color: 'red'};
+    pesoResidual = ((pesoMinimo - peso) / 2).toFixed(2);
+    ObjetoNecesidad = {
+      msg: `Tienes que perder peso ${pesoResidual}`,
+      color: "red",
+    };
   } else {
-    ObjetoNecesidad = {msg: 'Estas en un peso correcto / ideal', color: 'orange'};
+    ObjetoNecesidad = {
+      msg: "Estas en un peso correcto / ideal",
+      color: "orange",
+    };
   }
   return ObjetoNecesidad;
+};
+
+export const comprobarEdad = ( edad ) => {
+  if ( edad > 0 && Number.isInteger(edad) ) {
+    return true;
+  }
 }
+
+export const comprobarGenero = ( genero ) => {
+  if ( genero === "h" || genero === "m" ) {
+    return true; 
+  } else {
+    return false;
+  }
+}
+
+export const calcularCaloriasDiarias = (
+  peso,
+  altura,
+  edad,
+  genero,
+  nivelActividad
+) => {
+  //formula Mifflin-St Jeor
+  let bmr = 0.0;
+  let objetoCalorias = null;
+
+  if (genero === "h") {
+  //hombres
+    bmr = 10 * peso + 6.25 * (altura * 100) - 5 * edad + 5;
+  } else if (genero === "m") {
+  //mujeres
+    bmr = 10 * peso + 6.25 * (altura * 100) - 5 * edad - 161;
+  }
+
+  if (nivelActividad === "sedentario") {
+    objetoCalorias = { calorias: bmr * 1.2, nivel: "Sedentari" };
+  } else if (nivelActividad === "ligero") {
+    objetoCalorias = { calorias: bmr * 1.375, nivel: "Actividad ligera" };
+  } else if (nivelActividad === "moderado") {
+    objetoCalorias = { calorias: bmr * 1.55, nivel: "Actividad moderada" };
+  } else if (nivelActividad === "intenso") {
+    objetoCalorias = { calorias: bmr * 1.725, nivel: "Actividad intensa" };
+  } else if (nivelActividad === "alta_intensidad") {
+    objetoCalorias = { calorias: bmr * 1.9, nivel: "Actividad muy intensa" };
+  }
+  return objetoCalorias;
+};
