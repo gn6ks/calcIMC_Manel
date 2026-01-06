@@ -244,3 +244,13 @@ export const calcularCaloriasDiarias = (
   }
   return objetoCalorias;
 };
+
+export const calcularPorcentajeGrasaCorporal = (imc, edad, genero) => {
+  let porcentajeGrasa = 0.0;
+  if (genero === "h") {
+    porcentajeGrasa = 1.20 * imc + (0.23 * edad) - (10.8 * 1) - 5.4;
+  } else if (genero === "m") {
+    porcentajeGrasa = 1.20 * imc + (0.23 * edad) - (10.8 * 0) - 5.4;
+  }
+  return porcentajeGrasa;
+};

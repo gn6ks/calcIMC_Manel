@@ -32,6 +32,7 @@ const Resultat = (props) => {
     props.genero,
     props.nivelActividad
   );
+  const porcentajeGrasaCorporal = props.porcentajeGrasaCorporal;
   return (
     <View style={{ alignItems: "center" }}>
       <Text style={{ fontSize: 20 }}>
@@ -48,7 +49,10 @@ const Resultat = (props) => {
         {necesidadPeso.msg}
       </Text>
       <Text style={{ fontSize: 20 }}>
-        Calorias necesarias recomendadas son: {caloriasDiarias.calorias} kcal.
+        Calorias necesarias recomendadas son: {caloriasDiarias.calorias.toFixed(2)} kcal.
+      </Text>
+      <Text style={{ fontSize: 20 }}>
+        Porcentaje de grasa corporal: {porcentajeGrasaCorporal.toFixed(2)} %.
       </Text>
     </View>
   );
