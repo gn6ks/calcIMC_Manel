@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 
-import { StyleSheet, View, Keyboard } from "react-native";
-import { TextInput, Button, HelperText, RadioButton } from "react-native-paper";
+import { StyleSheet, View, Keyboard, TurboModuleRegistry } from "react-native";
+import {
+  TextInput,
+  Button,
+  HelperText,
+  RadioButton,
+  ToggleButton,
+  Chip,
+} from "react-native-paper";
 import {
   comprovaPes,
   comprovaAlt,
   comprobarEdad,
-  comprobarGenero,
   calculaIMC,
-  calcularPorcentajeGrasaCorporal,
 } from "../../utils/Utils";
 
 /**
@@ -70,19 +75,9 @@ const Calculadora = (props) => {
   const compruebaActualizaEdad = (edad) => {
     const resultadoComprobacion = comprobarEdad(edad);
     if (resultadoComprobacion) {
-      cambiarMensajeError("algo no esta puesto correctamente");
+      cambiarMensajeError("esta no es una edad posible");
     } else {
       cambiarEdad(edad);
-      props.comunicaIMC(null);
-    }
-  };
-
-  const compruebaActualizaGenero = (genero) => {
-    const resultadoComprobacion = comprobarGenero(genero);
-    if (resultadoComprobacion) {
-      cambiarMensajeError("algo no esta puesto correctamente");
-    } else {
-      cambiarGenero(genero);
       props.comunicaIMC(null);
     }
   };
@@ -164,7 +159,7 @@ const Calculadora = (props) => {
       </View>
       <View>
         {/* cambiar por toggle buttons "solo el icono?" o se puede texto? */}
-        <RadioButton.Group>
+        {/* <RadioButton.Group>
           <RadioButton.Item
             label="Hombre"
             value="h"
@@ -177,7 +172,20 @@ const Calculadora = (props) => {
             status={genero === "m" ? "checked" : "unchecked"}
             onPress={() => cambiarGenero("m")}
           />
-        </RadioButton.Group>
+        </RadioButton.Group> */}
+        <ToggleButton
+          
+          icon="gender-female"
+          value="mujer"
+          status={genero === "m" ? "checked" : "unchecked"}
+          onPress={() => cambiarGenero("m")}
+        />
+        <ToggleButton
+          icon="gender-male"
+          value="mujer"
+          status={genero === "h" ? "checked" : "unchecked"}
+          onPress={() => cambiarGenero("h")}
+        />
       </View>
       <View>
         {/* cambiar por los chips o por una lista mejor */}
