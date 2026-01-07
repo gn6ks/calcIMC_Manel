@@ -30,7 +30,6 @@ const App = () => {
   const [edadRecibida, cambioEdadRecibida] = useState(null);
   const [generoRecibido, cambioGeneroRecibido] = useState(null);
   const [nivelActividadRecibido, cambioNivelActividadRecibido] = useState(null);
-  const [porcentajeGrasaCorporal, cambioPorcentajeGrasaCorporal] = useState(null);
 
   const rebreIMC = (unIMC) => {
     canviaImcRebut(unIMC);
@@ -56,10 +55,6 @@ const App = () => {
     cambioNivelActividadRecibido(nivelActividad);
   };
 
-  const recibePorcentajeGrasaCorporal = (porcentaje) => {
-    cambioPorcentajeGrasaCorporal(porcentaje);
-  };
-
   return (
     <View>
       <StatusBar />
@@ -72,7 +67,6 @@ const App = () => {
           escribeEdad={recibeEdad}
           escribeGenero={recibeGenero}
           escribeNivelActividad={recibeNivelActividad}
-          escribePorcentajeGrasaCorporal={recibePorcentajeGrasaCorporal}
         />
         {imcRebut !== null && (
           <Resultat
@@ -82,7 +76,6 @@ const App = () => {
             edad={edadRecibida}
             genero={generoRecibido}
             nivelActividad={nivelActividadRecibido}
-            porcentajeGrasaCorporal={porcentajeGrasaCorporal}
           />
         )}
       </View>

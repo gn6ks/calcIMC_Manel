@@ -153,6 +153,8 @@ export const valoracioIMC = (unIMC) => {
   return objectResultat;
 };
 
+//funciones de la ampliacion (funcionalidades pablo)
+
 /**
  * Funcion para calcular el rango de peso ideal segun la altura proporcionada por parametro
  * El peso ideal se basa en el rango de IMC entre 18.5 y 24.9
@@ -174,9 +176,14 @@ export const pesoIdeal = (altura) => {
  * @param {*} pesoMaximo
  * @returns
  */
-export const calcularNecesidad = (peso, pesoMinimo, pesoMaximo) => {
+export const calcularNecesidad = (peso, altura) => {
   let ObjetoNecesidad = null;
   let pesoResidual = 0.0;
+
+  const rangoPesos = pesoIdeal(altura);
+  let pesoMaximo = rangoPesos.max;
+  let pesoMinimo = rangoPesos.min;
+
   if (peso < pesoMinimo) {
     pesoResidual = ((pesoMaximo - peso) / 2).toFixed(2);
     ObjetoNecesidad = {
@@ -198,12 +205,24 @@ export const calcularNecesidad = (peso, pesoMinimo, pesoMaximo) => {
   return ObjetoNecesidad;
 };
 
+/**
+ * funcion para comprobar que una edad es positiva
+ *
+ * @param {*} edad
+ * @returns
+ */
 export const comprobarEdad = (edad) => {
   if (edad > 0 && Number.isInteger(edad)) {
     return true;
   }
 };
 
+/**
+ * funcion para comprobar que se ha puesto correctamente uno de los dos generos
+ * a escoger por parte de los usuarios
+ * @param {*} genero
+ * @returns
+ */
 export const comprobarGenero = (genero) => {
   if (genero === "h" || genero === "m") {
     return true;
@@ -212,9 +231,20 @@ export const comprobarGenero = (genero) => {
   }
 };
 
+/**
+ * funcion para calcular el consumo de calorias diarias necesarias segun peso, edad,
+ * altura, genero y nivel de actividad del usuario
+ *
+ * @param {*} peso
+ * @param {*} altura
+ * @param {*} edad
+ * @param {*} genero
+ * @param {*} nivelActividad
+ * @returns
+ */
 export const calcularCaloriasDiarias = (
   peso,
-  altura, 
+  altura,
   edad,
   genero,
   nivelActividad
@@ -245,12 +275,57 @@ export const calcularCaloriasDiarias = (
   return objetoCalorias;
 };
 
+/**
+ * funcion para calcular el porcentaje de grasa corporal, segun el imc, edad y genero del usuario
+ * @param {*} imc
+ * @param {*} edad
+ * @param {*} genero
+ * @returns
+ */
 export const calcularPorcentajeGrasaCorporal = (imc, edad, genero) => {
   let porcentajeGrasa = 0.0;
   if (genero === "h") {
-    porcentajeGrasa = 1.20 * imc + (0.23 * edad) - (10.8 * 1) - 5.4;
+    porcentajeGrasa = 1.2 * imc + 0.23 * edad - 10.8 * 1 - 5.4;
   } else if (genero === "m") {
-    porcentajeGrasa = 1.20 * imc + (0.23 * edad) - (10.8 * 0) - 5.4;
+    porcentajeGrasa = 1.2 * imc + 0.23 * edad - 10.8 * 0 - 5.4;
   }
   return porcentajeGrasa;
+};
+
+/**
+ * Funcion GOD que calcula el IMC, calcula el peso ideal, calcula la necesidad de perdida o ganancia de peso,
+ * calcula las kcal diarias que necesita el usuario segun los datos proporcionados,
+ * calcula el porcentaje de grasa del usuario.
+ * 
+ * @param {*} peso 
+ * @param {*} altura 
+ * @param {*} edad 
+ * @param {*} genero 
+ * @param {*} nivelActividad 
+ * @returns - Objeto que tiene todas las propiedades mencionadas arriba
+ */
+export const calcularDatos = (peso, altura, edad, genero, nivelActividad) => {
+  const imcCalculado = calculaIMC(peso, altura);
+  const ideal = pesoIdeal(altura);
+  const necesidad = calcularNecesidad(peso, altura);
+  const kcal = calcularCaloriasDiarias(
+    peso,
+    altura,
+    edad,
+    genero,
+    nivelActividad
+  );
+  const grasaCorporal = calcularPorcentajeGrasaCorporal(
+    imcCalculado,
+    edad,
+    genero
+  );
+
+  return {
+    imc: imcCalculado,
+    pesoIdeal: ideal,
+    necesidad: necesidad,
+    kcalDiario: kcal,
+    porcentajeGrasa: grasaCorporal,
+  };
 };

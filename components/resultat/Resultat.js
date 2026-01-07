@@ -1,12 +1,7 @@
 import React from "react";
 
 import { Text, View } from "react-native";
-import {
-  valoracioIMC,
-  pesoIdeal,
-  calcularNecesidad,
-  calcularCaloriasDiarias,
-} from "../../utils/Utils";
+import { calcularDatos } from "../../utils/Utils";
 
 /**
  * Component stateless que mostra
@@ -18,41 +13,34 @@ import {
  * <Resultat imc=34.5 />
  */
 const Resultat = (props) => {
-  const valoracio = valoracioIMC(props.imc);
-  const pesoIdealObj = pesoIdeal(props.altura);
-  const necesidadPeso = calcularNecesidad(
-    props.peso,
-    pesoIdealObj.min,
-    pesoIdealObj.max
-  );
-  const caloriasDiarias = calcularCaloriasDiarias(
+  const datos = calcularDatos(
     props.peso,
     props.altura,
     props.edad,
     props.genero,
     props.nivelActividad
   );
-  const porcentajeGrasaCorporal = props.porcentajeGrasaCorporal;
   return (
     <View style={{ alignItems: "center" }}>
       <Text style={{ fontSize: 20 }}>
         Tens un IMC de {parseFloat(props.imc).toFixed(2)}
       </Text>
-      <Text style={{ color: valoracio.color, fontSize: 20 }}>
-        {valoracio.msg}
+      <Text style={{ color: datos.imc.color, fontSize: 20 }}>
+        {datos.imc.msg}
       </Text>
       <Text style={{ fontSize: 20 }}>
-        Tu peso ideal esta entre {parseFloat(pesoIdealObj.min).toFixed(2)} kg y{" "}
-        {parseFloat(pesoIdealObj.max).toFixed(2)} kg
+        Tu peso ideal esta entre {(datos.pesoIdeal.min).toFixed(2)} kg y{" "}
+        {(datos.pesoIdeal.max).toFixed(2)} kg
       </Text>
-      <Text style={{ color: necesidadPeso.color, fontSize: 20 }}>
-        {necesidadPeso.msg}
-      </Text>
-      <Text style={{ fontSize: 20 }}>
-        Calorias necesarias recomendadas son: {caloriasDiarias.calorias.toFixed(2)} kcal.
+      <Text style={{ color: datos.necesidad.color, fontSize: 20 }}>
+        {datos.necesidad.msg}
       </Text>
       <Text style={{ fontSize: 20 }}>
-        Porcentaje de grasa corporal: {porcentajeGrasaCorporal.toFixed(2)} %.
+        Calorias necesarias recomendadas son:{" "}
+        {datos.kcalDiario.calorias.toFixed(2)} kcal.
+      </Text>
+      <Text style={{ fontSize: 20 }}>
+        Porcentaje de grasa corporal: {datos.porcentajeGrasa.toFixed(2)} %.
       </Text>
     </View>
   );

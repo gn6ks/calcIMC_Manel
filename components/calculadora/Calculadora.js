@@ -228,13 +228,6 @@ const Calculadora = (props) => {
               props.escribeEdad(edad);
               props.escribeGenero(genero);
               props.escribeNivelActividad(nivelActividad);
-              props.escribePorcentajeGrasaCorporal(
-                calcularPorcentajeGrasaCorporal(
-                  calculaIMC(pes, alt),
-                  edad,
-                  genero
-                )
-              );
             }}
           >
             Calcular
