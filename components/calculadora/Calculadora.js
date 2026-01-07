@@ -163,6 +163,7 @@ const Calculadora = (props) => {
         </View>
       </View>
       <View>
+        {/* cambiar por toggle buttons "solo el icono?" o se puede texto? */}
         <RadioButton.Group>
           <RadioButton.Item
             label="Hombre"
@@ -179,6 +180,7 @@ const Calculadora = (props) => {
         </RadioButton.Group>
       </View>
       <View>
+        {/* cambiar por los chips o por una lista mejor */}
         <RadioButton.Group>
           <RadioButton.Item
             label="sedentario"
