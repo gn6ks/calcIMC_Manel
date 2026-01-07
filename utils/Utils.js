@@ -214,7 +214,7 @@ export const comprobarGenero = (genero) => {
 
 export const calcularCaloriasDiarias = (
   peso,
-  altura,
+  altura, 
   edad,
   genero,
   nivelActividad

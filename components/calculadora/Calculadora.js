@@ -37,6 +37,7 @@ const Calculadora = (props) => {
   const [genero, cambiarGenero] = useState(""); //contiene el genero del usuario: h o m
   const [edad, cambiarEdad] = useState(0); //contiene la edad del usuario
   const [nivelActividad, cambiarNivelActividad] = useState(""); //contiene el nivel de actividad del usuario
+  const [mensajeErrorGeneral = cambiarMensajeError] = useState("");
 
   /**
    * Aquesta funció rep un pes, i comprova si té el format adient.
@@ -68,14 +69,22 @@ const Calculadora = (props) => {
 
   const compruebaActualizaEdad = (edad) => {
     const resultadoComprobacion = comprobarEdad(edad);
-    cambiarEdad(edad);
-    props.comunicaIMC(null);
+    if (resultadoComprobacion) {
+      cambiarMensajeError("algo no esta puesto correctamente");
+    } else {
+      cambiarEdad(edad);
+      props.comunicaIMC(null);
+    }
   };
 
   const compruebaActualizaGenero = (genero) => {
     const resultadoComprobacion = comprobarGenero(genero);
-    cambiarGenero(genero);
-    props.comunicaIMC(null);
+    if (resultadoComprobacion) {
+      cambiarMensajeError("algo no esta puesto correctamente");
+    } else {
+      cambiarGenero(genero);
+      props.comunicaIMC(null);
+    }
   };
 
   /**
@@ -219,7 +228,13 @@ const Calculadora = (props) => {
               props.escribeEdad(edad);
               props.escribeGenero(genero);
               props.escribeNivelActividad(nivelActividad);
-              props.escribePorcentajeGrasaCorporal(calcularPorcentajeGrasaCorporal(calculaIMC(pes, alt), edad, genero));
+              props.escribePorcentajeGrasaCorporal(
+                calcularPorcentajeGrasaCorporal(
+                  calculaIMC(pes, alt),
+                  edad,
+                  genero
+                )
+              );
             }}
           >
             Calcular
